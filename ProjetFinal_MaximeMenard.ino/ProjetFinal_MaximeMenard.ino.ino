@@ -1,7 +1,14 @@
+#include <Servo.h>
+
 #define InDrive_1 22
 #define InDrive_2 24
 #define InDrive_3 26
 #define InDrive_4 28
+
+
+Servo Claw;
+int ClawPin = 2;
+
 
 int d = 950;
 bool Button = 0;
@@ -12,23 +19,12 @@ int InDrivesLength = 4;
 int startPos = 0;
 int increment = 1;
 
+
+
 void setup() {
 
-  Serial.begin(9600);
-
-  
-     
-      pinMode(InDrive_1, OUTPUT);
-      pinMode(InDrive_2, OUTPUT);
-      pinMode(InDrive_3, OUTPUT);
-      pinMode(InDrive_4, OUTPUT);
-      
-      digitalWrite(InDrive_1, LOW);
-      digitalWrite(InDrive_2, LOW);
-      digitalWrite(InDrive_3, LOW);
-      digitalWrite(InDrive_4, LOW);
-
-      
+InitPins();
+   
 
 }
 
@@ -82,6 +78,53 @@ for(int i=0; i< 500 ; i++){
 }
 
 
+
+
+
+OpenClaw();
+delay(1000);
+
+CloseClaw();
+delay(1000);
+
+
+
+}//End Void Loop
+
+
+
+//****************Void Setup***********************//
+void InitPins(){
+  
+    Serial.begin(9600);
+   
+      pinMode(InDrive_1, OUTPUT);
+      pinMode(InDrive_2, OUTPUT);
+      pinMode(InDrive_3, OUTPUT);
+      pinMode(InDrive_4, OUTPUT);
+      Claw.attach(ClawPin);
+      
+      digitalWrite(InDrive_1, LOW);
+      digitalWrite(InDrive_2, LOW);
+      digitalWrite(InDrive_3, LOW);
+      digitalWrite(InDrive_4, LOW);
+
+}
+
+//*******************Claw control *********************//
+
+void OpenClaw(){
+Claw.write(0);
+}// Make claw go to 0 degrees 
+
+
+void CloseClaw(){
+Claw.write(90);  
+}// Make claw go to 100 degrees
+
+
+
+
 //  if (!isClockwise) {
 //    startPos = InDrivesLength - 1;
 //    increment = -1;
@@ -89,10 +132,3 @@ for(int i=0; i< 500 ; i++){
 
 
 
-
-
-
-
-
-
-}
