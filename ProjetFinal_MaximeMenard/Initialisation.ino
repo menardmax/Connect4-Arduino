@@ -1,6 +1,5 @@
 //****************Void Setup***********************//
 void InitPins() {
-
   Serial.begin(9600);
   // initialize the LCD
   lcd.begin();
@@ -12,18 +11,16 @@ void InitPins() {
   pinMode(PhaseMoteur_2, OUTPUT);
   pinMode(PhaseMoteur_3, OUTPUT);
   pinMode(PhaseMoteur_4, OUTPUT);
-  Claw.attach(ClawPin);
 
+  Claw.attach(ClawPin);
   digitalWrite(PhaseMoteur_1, LOW);
   digitalWrite(PhaseMoteur_2, LOW);
   digitalWrite(PhaseMoteur_3, LOW);
   digitalWrite(PhaseMoteur_4, LOW);
-
   pinMode(LimitSwitch_Droite, INPUT);
   attachInterrupt(LimitSwitch_Droite, Interruption_LimitSwitch_Droite, FALLING);
   pinMode(LimitSwitch_Gauche, INPUT);
   attachInterrupt(LimitSwitch_Gauche, Interruption_LimitSwitch_Gauche, FALLING);
-
   pinMode(Colonne_1, INPUT);
   attachInterrupt(Colonne_1, InterruptionColonne1, FALLING);
   pinMode(Colonne_2, INPUT);
@@ -38,7 +35,7 @@ void InitPins() {
   attachInterrupt(Colonne_6, InterruptionColonne6, FALLING);
   pinMode(Colonne_7, INPUT);
   attachInterrupt(Colonne_7, InterruptionColonne7, FALLING);
-
   OpenClaw();
+  delay(2000);
 }
 

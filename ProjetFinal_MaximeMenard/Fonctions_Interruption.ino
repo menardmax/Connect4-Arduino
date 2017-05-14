@@ -1,22 +1,23 @@
 //**************FONCTIONS D'INTERRUPTION ****************************//
 
 void Interruption_LimitSwitch_Droite() {
-  //Si limit switch de droite appuyée
-  //Éteint 4phases
-  //On prend un jetons
-
+LimitSW();
 }
 
 
 void Interruption_LimitSwitch_Gauche() {
+LimitSW(); 
 }
 
-void flash(int pin, int times, int delayMilis) {
-  for (int i = 0; i < times; i++) {
-    digitalWrite(pin, HIGH);
-    delay(delayMilis);
-    digitalWrite(pin, LOW);
-    delay(delayMilis);
+
+void LimitSW(){
+  //Antirebond
+  EtatLimitSW = true;
+  int Time = millis();
+  if(Time - timeOfLastLimitSW > 1000){
+    timeOfLastLimitSW = Time;
+    ShutdownAllPhases();
+    Serial.println("limitSW");
   }
 }
 
@@ -27,33 +28,33 @@ void InterruptionColonne(int NumeroColonne) {
   //Securite pour empecher l'effet rebond lorsqu'un jetons est place dans la 5e rangée du Grid
   if (Time - timeOfLastMove > 1000) {
     timeOfLastMove = Time;
-    PlacerJeton(NumeroColonne, turn);
-    PrintGrid();
+    PlacerJeton(NumeroColonne, turn, Grid);
+    PrintGrid(Grid);
     TypeJeton winner = isFinished(Grid);
     if (winner == nulle) {
 
       if (turn == humain) {
         turn = AI;
-
+        lcd.clear();
+        lcd.print("Tour Robot");
       }
       else {
         turn = humain;
-
+        lcd.clear();
+        lcd.print("Tour Joueur");
       }
-
-
     } else {
       Serial.println("We have a winner");
       Serial.println(winner);
 
-//      switch (winner) {
-//        case humain:
-//          flash(DelJaune, 10, 100);
-//          break;
-//        case AI:
-//          flash(DelRouge, 10, 100);
-//          break;
-//      }
+      switch (winner) {
+        case humain:
+
+          break;
+        case AI:
+
+          break;
+      }
     }
   }
 }

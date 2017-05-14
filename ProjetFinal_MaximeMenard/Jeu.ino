@@ -8,16 +8,27 @@ void ResetGrid() {
 
 }
 
-void PrintGrid() {
+void PrintGrid(TypeJeton grid[Hauteur][Largeur]) {
 
   for (int i = 0; i < Hauteur; i++) {
     for (int j = 0; j < Largeur; j++) {
-      Serial.print(Grid[i][j]);
+      Serial.print(grid[i][j]);
     }
     Serial.println();
   }
 
 }
+
+//TypeJeton[][] gridCopy(TypeJeton grid[Hauteur][Largeur]) {
+//  TypeJeton gridCopy[Hauteur][Largeur];
+//   for (int i = 0; i < Hauteur; i++) {
+//    for (int j = 0; j < Largeur; j++) {
+//      gridCopy[i][j] = grid[i][j];
+//    }
+//
+//  }
+//  return gridCopy;
+//}
 
 //Cette variable : FourInARow est a true si on a detecte un jeton
 //du meme etat que le precedent
@@ -106,13 +117,13 @@ TypeJeton isFinished(TypeJeton Grid[Hauteur][Largeur]) {
 
 //Utiliser cette fonction lorsqu'un jeton doit être placé dans une colonne
 //On donne 2 paramètres d'entré soit le # de colonne et le type de jeton (Humain ou AI)
-void PlacerJeton (int Colonne, TypeJeton Jeton) {
+void PlacerJeton(int Colonne, TypeJeton Jeton, TypeJeton grid[Hauteur][Largeur]) {
   int i = Hauteur - 1;
-  while (i >= 0 && Grid[i][Colonne] != nulle) {
+  while (i >= 0 && grid[i][Colonne] != nulle) {
     i -= 1;
   }
   if (i >= 0) {
-    Grid [i][Colonne] = Jeton;
+    grid[i][Colonne] = Jeton;
   }
 
 
