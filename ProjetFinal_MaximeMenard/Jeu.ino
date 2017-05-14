@@ -25,10 +25,10 @@ TypeJeton isFinished(TypeJeton Grid[Hauteur][Largeur]) {
   for (int i = 0; i < Hauteur; i++) {
     for (int j = 0; j < Largeur; j++) {
       TypeJeton jeton = Grid[i][j];
-      if(jeton == nulle){
+      if (jeton == nulle) {
         continue;
-       }
-        
+      }
+
       boolean FourInaRow = true;
       //On verifi la hauteur si on a 4 in a row
       for (int k = 1; k < 4; k++) {
@@ -101,5 +101,19 @@ TypeJeton isFinished(TypeJeton Grid[Hauteur][Largeur]) {
 
     }
   }
-return nulle;
+  return nulle;
+}
+
+//Utiliser cette fonction lorsqu'un jeton doit être placé dans une colonne
+//On donne 2 paramètres d'entré soit le # de colonne et le type de jeton (Humain ou AI)
+void PlacerJeton (int Colonne, TypeJeton Jeton) {
+  int i = Hauteur - 1;
+  while (i >= 0 && Grid[i][Colonne] != nulle) {
+    i -= 1;
+  }
+  if (i >= 0) {
+    Grid [i][Colonne] = Jeton;
+  }
+
+
 }

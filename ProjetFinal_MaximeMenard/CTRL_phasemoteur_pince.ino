@@ -71,12 +71,3 @@ Claw.write(0);
 void CloseClaw(){
 Claw.write(90);  
 }// Make claw go to 100 degrees
-
-
-
-
-//  if (!isClockwise) {
-//    startPos = MoteurPhaseLength - 1;
-//    increment = -1;
-//  }
-
